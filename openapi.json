@@ -1,0 +1,113 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Marvel API",
+      "version": "1.0.0",
+      "description": "APIs for user SignUp, SignIn and Character Search"
+    },
+    "servers": [
+      {
+        "url": "localhost",
+        "description": "Development server"
+      }
+    ],
+    "paths": {
+      "/auth/signup": {
+        "post": {
+          "summary": "Sign up a user",
+          "tags": ["Auth"],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignUpUser"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful sign-up"
+            }
+          }
+        }
+      },
+      "/auth/signin": {
+        "post": {
+          "summary": "Sign in a user",
+          "tags": ["Auth"],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignInUser"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful sign-in"
+            }
+          }
+        }
+      },
+      "/characters": {
+        "get": {
+          "summary": "Search for characters",
+          "tags": ["Characters"],
+          "parameters": [
+            {
+              "name": "search",
+              "in": "query",
+              "description": "Character name",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Get characters array"
+            }
+          },
+          "security": [
+            {
+              "bearerAuth": ["bearerAuth"]
+            }
+          ]
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "SignUpUser": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "email": { "type": "string", "format": "email" },
+            "password": { "type": "string" },
+            "phone": { "type": "string", "minLength": 10, "maxLength": 20 }
+          },
+          "required": ["name", "email", "password", "phone"]
+        },
+        "SignInUser": {
+          "type": "object",
+          "properties": {
+            "email": { "type": "string", "format": "email" },
+            "password": { "type": "string" }
+          },
+          "required": ["email", "password"]
+        }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    }
+  }
+  

@@ -8,7 +8,7 @@ class JWTHelper{
 
     static verify(token:string){
         try{
-            jwt.verify(token,process.env.JWT_SECRET!)
+            return jwt.verify(token,process.env.JWT_SECRET!)
         }catch(err){
             throw new CustomError(401,'UNAUTHORIZED',"Invalid Token")
         }

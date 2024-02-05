@@ -4,9 +4,10 @@ const validationMiddleware = (schema:z.ZodObject<any,any,any>)=>async(ctx:Contex
     try{
        const validatedData =  schema.parse(ctx.request.body)
        ctx.validatedData = validatedData
-    }catch(err){
+    }catch(err:any){
+        console.log(err?.message)
         if(err instanceof ZodError){
-            return ctx.sendError(400,"Validation Error", err)
+            return ctx.sendError(400,"VALIDATION_ERROR", "Invalid Payload")
         }
     }
     await next()

@@ -11,14 +11,22 @@
     "zod": "^3.22.4"
   },
   "scripts": {
-    "dev": "nodemon --exec ts-node ./src/server.ts --watch"
+    "dev": "nodemon --exec ts-node ./src/server.ts --watch",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/koa": "^2.14.0",
     "@types/koa__router": "^12.0.4",
     "@types/koa-bodyparser": "^4.3.12",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "koa2-swagger-ui": "^5.10.0",
     "nodemon": "^3.0.3",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2"
   }
 }

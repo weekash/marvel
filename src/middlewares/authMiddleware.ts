@@ -8,7 +8,8 @@ const authMiddleware = async(ctx:Context, next:Next)=>{
         return ctx.sendError(401, "UNAUTHORIZED","You are not allowed to access the resource")
     }
     token = token.split("Bearer ")[1]
-    JWTHelper.verify(token)
+    const user = JWTHelper.verify(token)
+    ctx.user = user
     await next()
 }
 

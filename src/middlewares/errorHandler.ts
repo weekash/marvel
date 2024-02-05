@@ -5,8 +5,8 @@ import CustomError from "../utils/CustomError";
 const errorHandler = async(ctx:Context, next:Next)=>{
     try{
         await next()
-    }catch(err){
-        console.log(err)
+    }catch(err:any){
+        console.log(err?.message)
         if(err instanceof CustomError){
             return ctx.sendError(err.statusCode, err.errorCode, err.message)
         } else{
