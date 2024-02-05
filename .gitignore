@@ -35,3 +35,4 @@ logs/
 
 # User-specific files
 npm
+**/config/config.json
